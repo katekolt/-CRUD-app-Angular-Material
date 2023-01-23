@@ -1,0 +1,49 @@
+﻿<h1>{{title}}</h1>
+<mat-card>
+  <mat-card-content>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+            <mat-error *ngIf="submitted && f.firstName.errors">
+                <mat-error *ngIf="f.firstName.errors.required">First Name is required</mat-error>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+            <input matInput type="text" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <mat-error *ngIf="submitted && f.lastName.errors" >
+                <mat-error *ngIf="f.lastName.errors.required">Last Name is required</mat-error>
+            </mat-error>
+          </mat-form-field>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <mat-error *ngIf="submitted && f.username.errors">
+                <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Password
+                <em *ngIf="id">(Leave blank to keep the same password)</em>
+            </mat-label>
+            <input matInput type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <mat-error *ngIf="submitted && f.password.errors">
+                <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
+                <mat-card-content *ngIf="f.password.errors.minlength">Password must be at least 6 characters</mat-card-content>
+            </mat-error>
+        </mat-form-field>
+    <div >
+        <button mat-raised-button color="primary" [disabled]="submitting" >
+            <span *ngIf="submitting"></span>
+            Save
+        </button>
+        <a routerLink="/users" mat-raised-button color="link">Cancel</a>
+    </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>
+  </mat-card-content>
+  </mat-card>
